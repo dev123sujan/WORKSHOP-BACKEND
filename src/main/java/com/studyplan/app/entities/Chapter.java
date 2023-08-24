@@ -32,35 +32,6 @@ public class Chapter {
     private Subject subject;
 
 
-    public Long getChapterId() {
-        return chapterId;
-    }
 
-    public void setChapterId(Long chapterId) {
-        this.chapterId = chapterId;
-    }
 
-    public String getChapterTitle() {
-        return chapterTitle;
-    }
-
-    public void setChapterTitle(String chapterTitle) {
-        this.chapterTitle = chapterTitle;
-    }
-
-    public String getChapterDescription() {
-        return chapterDescription;
-    }
-
-    public void setChapterDescription(String chapterDescription) {
-        this.chapterDescription = chapterDescription;
-    }
-
-    public Subject getSubject() {
-        return subject;
-    }
-
-    public void setSubject(Subject subject) {
-        this.subject = subject;
-    }
 }

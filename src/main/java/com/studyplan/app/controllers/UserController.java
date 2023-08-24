@@ -33,6 +33,21 @@ public class UserController {
         return new ResponseEntity(savedUser, HttpStatus.OK);
     }
 
+    //http://localhost:8080/api/users/signIn
+    @PostMapping("/signIn")
+    public ResponseEntity<?> signIn(@RequestBody SignInDto signInDto){
+        System.out.println(signInDto);
+        if(!userRepository.existsByEmail(signInDto.getEmail())){
+            return new ResponseEntity<>("User Not Found", HttpStatus.NOT_FOUND);
+        }
+        User userObj = userRepository.findByEmail(signInDto.getEmail());
+        System.out.println(userObj);
+        if(!signInDto.getPassword().equals(userObj.getPassword())){
+            return new ResponseEntity<>("You entered wrong password", HttpStatus.BAD_REQUEST);
+        }
+        System.out.println("200 ok");
+        return new ResponseEntity<>(userObj, HttpStatus.OK );
+    }
 
     //http://localhost:8080/api/users/{userId}/user
     @GetMapping("/{userId}/user")
@@ -67,23 +82,5 @@ public class UserController {
             return new ResponseEntity<>("User not found with this Id: "+userId, HttpStatus.NOT_FOUND);
         }
         return new ResponseEntity<>("User deleted Successfully", HttpStatus.OK);
-    }
-
-
-
-    //http://localhost:8080/api/users/signIn
-    @PostMapping("/signIn")
-    public ResponseEntity<?> signIn(@RequestBody SignInDto signInDto){
-        System.out.println(signInDto);
-        if(!userRepository.existsByEmail(signInDto.getEmail())){
-            return new ResponseEntity<>("User Not Found", HttpStatus.NOT_FOUND);
-        }
-        User userObj = userRepository.findByEmail(signInDto.getEmail());
-        System.out.println(userObj);
-        if(!signInDto.getPassword().equals(userObj.getPassword())){
-            return new ResponseEntity<>("You entered wrong password", HttpStatus.BAD_REQUEST);
-        }
-        System.out.println("200 ok");
-        return new ResponseEntity<>(userObj, HttpStatus.OK );
     }
 }
